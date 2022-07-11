@@ -1,6 +1,4 @@
 import json
-from xml.dom.minidom import CharacterData
-
 
 def get_morse(alphabet):
     with open("morse-code.json", "r") as file:
@@ -26,8 +24,10 @@ def main():
         user_letters = list(user_word.lower())
     
     print(f"Your Word ({user_word.upper()}) is in Morse Alphabet: ")
+    i = 0
     for letters in user_letters:
-        print(get_morse(letters),end=" ")
+        print(get_morse(letters),end="")
+    print("") # getting rid of % symbol at the end
 
 
 
