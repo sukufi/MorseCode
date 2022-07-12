@@ -1,4 +1,5 @@
 import json
+import re
 
 def get_morse(alphabet):
     with open("morse-code.json", "r") as file:
@@ -6,31 +7,22 @@ def get_morse(alphabet):
         morse_letter = data[f"{alphabet}"]
         return morse_letter
 
-def get_characters():
-    with open("morse-code.json", "r") as file:
-        data = json.load(file)
-        characters = list(data)
-        return characters
+def get_word():
+    user_word = str(input("What is your word/Sentence for translate? -> ")).lower()
+    user_letters = list(user_word)
+    re_list = re.findall("[a-zA-Z,.?!-/@() ]" , user_word)
+    
+    while re_list != user_letters:   
+        user_word = str(input("Invalid Characters In Your Text!\nWhat is your word/Sentence for translate? -> ")).lower()
+        user_letters = list(user_word)
+        re_list = re.findall("[a-zA-Z,.?!-/@() ]" , user_word)
+    return user_letters
 
 
 def main():
-    
-    user_word = input("What is your word/Sentence for translate? -> ")
-    user_letters = list(user_word.lower())
-    character_list = get_characters()
-    
-    while len(set(character_list).intersection(set(user_letters))) == 0 :
-        user_word = input("Invalid Character! Please try again. What is your input?")
-        user_letters = list(user_word.lower())
-    
-    print(f"Your Word ({user_word.upper()}) is in Morse Alphabet: ")
-    i = 0
-    for letters in user_letters:
-        print(get_morse(letters),end="")
-    print("") # getting rid of % symbol at the end
-
-
-
+    for i in get_word():
+        print(get_morse(i), end="")
+    print("")
 
 if __name__ == "__main__":
     main()
