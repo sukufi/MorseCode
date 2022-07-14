@@ -49,13 +49,13 @@ def main():
     if x == 1:
 
         for i in get_word():
-            print(get_morse(i), end="")
+            print(f"{get_morse(i)} ", end="")
         print("")
     
     elif x == 2:
         
         for i in get_code():
-            print(encoder(i), end= "")
+            print(f"{encoder(i)}", end= "")
         print("")
 
     
